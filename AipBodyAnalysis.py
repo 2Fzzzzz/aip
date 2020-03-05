@@ -5,7 +5,18 @@ import cv2
 import os
 import base64,requests
 import json
-
+#    获取吸烟检测的access_token
+def getDetectXiyantoken():
+    App_id=17363741
+    APIkey="tAdrW89HdlWt1oG59xGTQ4V1"
+    SecretKey="6nt07LPLynaa2qLUGai6mtpDj7USnYkB"
+# client_id 为官网获取的AK， client_secret 为官网获取的SK
+    host = 'https://aip.baidubce.com/oauth/2.0/token?grant_type=client_credentials&client_id='+APIkey+'&client_secret='+SecretKey
+    response = requests.get(host)
+    if response:
+        print(response.json()["access_token"])
+    return response.json()["access_token"]
+token=getDetectXiyantoken()
 # """ 你的 APPID AK SK """
 APP_ID = '17245297'
 API_KEY = 'rYu3mEhrFnWBUI8ILj9j4c1k'
@@ -29,7 +40,7 @@ def deleteByNum():
 def detecetxiyan(image):
     request_url = "	https://aip.baidubce.com/rpc/2.0/ai_custom/v1/detection/xiyan"
     data = {'image': base64.b64encode(image).decode()}
-    access_token = "24.c8d5ea8f4e5680acad06ca9c0589be94.2592000.1585993671.282335-17363741"
+    access_token = token
     request_url = request_url + "?access_token=" + access_token
     response = requests.post(request_url, data=json.dumps(data))
     content = response.json()
