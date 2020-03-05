@@ -29,7 +29,7 @@ def deleteByNum():
 def detecetxiyan(image):
     request_url = "	https://aip.baidubce.com/rpc/2.0/ai_custom/v1/detection/xiyan"
     data = {'image': base64.b64encode(image).decode()}
-    access_token = "24.becd537a02effd12ac4234bca9f68571.2592000.1575988992.282335-17363741"
+    access_token = "24.c8d5ea8f4e5680acad06ca9c0589be94.2592000.1585993671.282335-17363741"
     request_url = request_url + "?access_token=" + access_token
     response = requests.post(request_url, data=json.dumps(data))
     content = response.json()
